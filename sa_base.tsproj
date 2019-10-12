@@ -1,0 +1,10 @@
+[res]
+click.png
+[lib]
+[file]
+main.lua
+color_pick.lua
+action.lua
+tmp.lua
+
+task.lua
