@@ -1,6 +1,9 @@
+init(1)
+
 require "TSLib"
+
 cp = require("color_pick")
---task = require("task")
+task = require("task")
 --ac = require("action")
 
 local new_role_proc = false
@@ -99,11 +102,16 @@ function create_new_role(...)
 	end
 end
 
+role_info = {}
+
 function game_loop()
 	toast("开始咯！！！！")
 	local x, y
-
+	--每分钟检查一次等级信息
+	local time_role_check = os.date('%H%M',os.time())
+	
 	while (true) do
+		
 		::guide::
 		x,y = cp.get_guide_arraw()
 		if x ~= -1 and y ~= -1 then
@@ -125,15 +133,32 @@ function game_loop()
 
 		if cp.is_main_ui() then
 			tap(620, 1130, 60, "click.png")
-			mSleep(500)
+			if cp.has_protagonist_button() and time_role_check ~= os.date('%H%M',os.time()) then
+				tap(40, 1025, 50, "click.png")
+				mSleep(500)
+				text=ocrText(630, 160, 770, 210, 0)
+				dialog(text)
+			end
 		end
 		
 		if cp.is_task_ui() then
 			tap(90, 1050, 60, "click.png")
-			mSleep(500)
+			mSleep(3000)
 		end
 		
-
+		--日常任务
+		if cp.is_activity_ui() then
+			x,y = cp.daily_task()
+			if x ~= -1 and y~=-1 then
+				tap(x, y, 50, "click.png")
+				mSleep(500)
+			end
+			
+			if cp.daily_task_weituo() then
+				task.daily_weituo()
+			end
+		end
+		
 		if cp.is_dialog_ui() then
 			tap(720, 1300, 50, "click.png")
 			mSleep(500)
@@ -142,6 +167,10 @@ function game_loop()
 		if cp.is_mv_ui() then
 			tap(720, 1300, 50, "click.png")
 			mSleep(500)
+		end
+		
+		if cp.is_growing_path_ui() then
+			task.growing_path_reward()
 		end
 		
 		if cp.is_dialog_ui_fight() then
@@ -154,21 +183,47 @@ function game_loop()
 			mSleep(500)			
 		end
 		
+		--迅猛龙领养
+		if cp.adopt_xml_pet() then
+			tap(70, 650, 50, "click.png")
+		end
+		--任意宠物领养
 		if cp.adopt_pet() then
 			tap(70, 650, 50, "click.png")
 		end
 		
+
 		if cp.pet_egg() then
 			tap(400, 660, 50, "click.png")
 		end
 		
-
+		if cp.wealfare_exp() then
+			tap(540, 900, 50, "click.png")
+		end
+		
+		if cp.totem_summon_auto_equip() then
+			tap(185, 1080, 50, "click.png")
+			mSleep(1000)
+		end
+		
+		if cp.totem_summon_auto_train() then
+			tap(190, 390, 50, "click.png")
+			mSleep(2000)
+			tap(105, 645, 50, "click.png")
+			mSleep(2000)
+			tap(110, 360, 50, "click.png")
+			mSleep(5000)
+		end
+	
 	end
 end
 
 
 --clear_game_data()
---start_game()
+if isFrontApp("com.netmarble.stonemmocn") == 0 then
+	start_game()
+end
+
 --mSleep(3500)
 if new_role_proc then
 	create_new_role()
