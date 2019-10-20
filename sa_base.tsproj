@@ -8,3 +8,5 @@ action.lua
 tmp.lua
 
 task.lua
+
+text_pick.lua

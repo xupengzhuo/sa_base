@@ -17,12 +17,18 @@
 cp = {}
 local x, y
 
+--需要更新资源包
+function cp.need_update(...)
+	if isColor(364,180,0x595144,85) and isColor(622,446,0x3d4770,85) and isColor(759,204,0xd2a859,85) and isColor(547,189,0xfce6bb,85) and isColor(578,441,0xf8e4cf,85) and isColor(551,437,0xf2dfca,85) and isColor(750,202,0x4f4124,85) and isColor(377,201,0x585044,85) then
+		return true
+	else
+		return false
+	end
+end
+
 --公告画面
 function cp.start_screen_announcement(...)
-	if (isColor(  85,  105, 0xffcc00, 85) and 
-		isColor( 690,  107, 0xffcc00, 85) and 
-		isColor(  76, 1217, 0xffcc00, 85) and 
-		isColor( 706, 1225, 0xffffff, 85)) then
+	if isColor(1027,44,0xffffff,85) and isColor(123,43,0xffcc00,85) and isColor(105,549,0xffcc00,85) and isColor(1018,557,0xffcc00,85) and isColor(1024,57,0x000000,85) and isColor(1027,26,0x000000,85) and isColor(999,42,0xffcc00,85) then		
 		return true
 	else
 		return false
@@ -31,16 +37,7 @@ end
 
 --选区画面（无角色)
 function cp.choose_server(...)		
-	if (isColor(  47,  937, 0xf76263, 85) and 
-		isColor(  45, 1036, 0xf7c163, 85) and 
-		isColor(  48, 1136, 0x92ba5c, 85) and 
-		isColor(  47, 1235, 0x7f7f7f, 85) and 
-		isColor( 592,   52, 0xf5d83e, 85) and 
-		isColor( 656,  313, 0xcdac36, 85) and 
-		isColor( 587,  312, 0xe3c73e, 85) and 
-		isColor( 655,   54, 0xf1c83a, 85) and 
-		isColor( 622,  283, 0xfee272, 85) and 
-		isColor( 613,  184, 0xfde171, 85)) then
+	if isColor(269,108,0xf5cf3a,85) and isColor(89,100,0xdcbba5,85) and isColor(103,107,0xdca088,85) and isColor(53,117,0xc18462,85) and isColor(596,110,0x27241f,85) and isColor(236,109,0xe6cc67,85) and isColor(151,107,0xf6db6e,85) and isColor(801,595,0xf76363,85) and isColor(884,594,0xf7c363,85) and isColor(971,594,0x91b85a,85) then		
 		return true
 	else
 		return false
@@ -49,8 +46,8 @@ end
 
 --选取画面是否已经有角色存在
 function cp.server_exist_role(...)
-	x,y = findMultiColorInRegionFuzzy( 0x8984ad, "2|13|0xfff5b5,30|29|0x745029,57|11|0xc3c6cd,49|51|0xf4efea,5|54|0xf9a274,1|42|0xffda97,17|97|0x798386,63|6|0xbdbdcd,-1|24|0xdfd8bf", 90, 581, 47, 661, 320)
-	
+	--x,y = findMultiColorInRegionFuzzy( 0x8984ad, "2|13|0xfff5b5,30|29|0x745029,57|11|0xc3c6cd,49|51|0xf4efea,5|54|0xf9a274,1|42|0xffda97,17|97|0x798386,63|6|0xbdbdcd,-1|24|0xdfd8bf", 90, 581, 47, 661, 320)
+	x,y = findMultiColorInRegionFuzzy( 0xebddab, "-588|-8|0x6e71ae,-551|10|0x583f2b,-557|-7|0xe6a47e,-234|8|0xdddcdb,139|491|0xf76363,222|492|0xf7c363,308|492|0x93b95a,396|491|0x83837f", 90, 0, 0, 1135, 639)
 	if x ~= -1 and y ~= -1 then
 		return true
 	else
@@ -59,16 +56,7 @@ function cp.server_exist_role(...)
 end
 --登陆画面
 function cp.login_zone_1(...)
-	if (isColor( 112,  600, 0x584224, 85) and 
-		isColor( 112,  603, 0xf4eab9, 85) and 
-		isColor( 112,  633, 0xa46d2c, 85) and 
-		isColor( 112,  637, 0xfbf1bf, 85) and 
-		isColor( 112,  659, 0x40321e, 85) and 
-		isColor( 138,  644, 0xfef4c1, 85) and 
-		isColor( 214,  675, 0xf6f6f6, 85) and 
-		isColor( 210,  683, 0x241e16, 85) and 
-		isColor( 212,  695, 0x736f6a, 85) and 
-		isColor( 219,  716, 0x47433c, 85)) then		
+	if isColor(496,448,0xfefefe,85) and isColor(497,459,0xeeeded,85) and isColor(506,451,0xf8f8f8,85) and isColor(514,454,0xdbdad9,85) and isColor(519,459,0xffffff,85) and isColor(652,451,0xffffff,85) and isColor(652,460,0xffffff,85) and isColor(612,452,0xf4f3f3,85) and isColor(597,460,0xf8f8f8,85) and isColor(554,541,0xd38c36,85) then
 		return true
 	else
 		return false
@@ -76,17 +64,8 @@ function cp.login_zone_1(...)
 end
 
 --新角色提示窗
-function cp.new_role(...)
-	if (isColor( 507,  605, 0xd76377, 85) and 
-		isColor( 520,  709, 0xc65869, 85) and 
-		isColor( 237,  617, 0x5f703e, 85) and 
-		isColor( 224,  733, 0x3e4872, 85) and 
-		isColor( 483,  763, 0xa1cbeb, 85) and 
-		isColor( 563,  645, 0xffffea, 85) and 
-		isColor( 432,  530, 0x935430, 85) and 
-		isColor( 432,  636, 0xffe372, 85) and 
-		isColor( 453,  697, 0xffe372, 85) and 
-		isColor( 432,  695, 0xffe372, 85)) then
+function cp.new_player(...)
+	if isColor(429,453,0x60703e,85) and isColor(695,450,0x3e4872,85) and isColor(562,264,0xfee272,85) and isColor(654,449,0xecd9c4,85) and isColor(463,447,0xd1bfac,85) and isColor(445,446,0xf2dec9,85) and isColor(682,274,0x935530,85) and isColor(646,229,0x95badc,85) then		
 		return true
 	else
 		return false
@@ -95,16 +74,7 @@ end
 
 --选择人物
 function cp.choose_new_role(...)
-	if (isColor( 102,   12, 0x96b4b0, 85) and 
-		isColor(  31,  640, 0xffffff, 85) and 
-		isColor( 110, 1143, 0x8aa4a5, 85) and 
-		isColor(  19,  503, 0x1f2418, 85) and 
-		isColor( 382,  578, 0x7e3121, 85) and 
-		isColor( 280,  842, 0xded2b9, 85) and 
-		isColor( 242,  882, 0x598a54, 85) and 
-		isColor( 395,   14, 0x253f60, 85) and 
-		isColor( 299,  169, 0xc9c0b1, 85) and 
-		isColor( 305,  162, 0xe1ded1, 85)) then
+	if isColor(755,401,0x8c674e,85) and isColor(720,414,0xb39479,85) and isColor(720,421,0xd7cbb1,85) and isColor(631,620,0xffffff,85) and isColor(621,619,0xe3e2e1,85) and isColor(980,287,0x5db2ae,85) and isColor(75,314,0x7c5748,85) and isColor(37,378,0x747458,85) and isColor(101,386,0xbdbe9f,85) and isColor(112,595,0x639559,85) then		
 		return true
 	else
 		return false
@@ -113,33 +83,34 @@ end
 
 --确认属性
 function cp.confirm_role(...)
-	if (isColor(  28,  983, 0x63733d, 85) and 
-		isColor(  28, 1310, 0x61713e, 85) and 
-		isColor(  71, 1309, 0x62723b, 85) and 
-		isColor(  72,  987, 0x5f703c, 85) and 
-		isColor(  50, 1013, 0x5e713e, 85) and 
-		isColor(  48, 1077, 0x60713e, 85) and 
-		isColor(  45, 1202, 0x60713e, 85) and 
-		isColor(  47, 1273, 0x60713e, 85) and 
-		isColor(  25,  830, 0xffffff, 85) and 
-		isColor(  10,  825, 0xfefefe, 85)) then
+	if isColor(1118,617,0x5d6e3d,85) and isColor(1119,577,0x5e703f,85) and isColor(851,583,0x60703d,85) and isColor(707,617,0xffffff,85) and isColor(695,626,0xfbfbfb,85) and isColor(951,590,0xdecbb8,85) and isColor(957,598,0xddcab7,85) and isColor(996,595,0xf6e2cd,85) and isColor(976,596,0xf5e1cc,85) and isColor(989,600,0xeddac5,85) then
 		return true
 	else
 		return false
 	end
 end
+
+--确认名字
+function cp.confirm_name(...)
+	if isColor(1094,604,0x60713e,85) and isColor(848,582,0x60703c,85) and isColor(849,614,0x5f703c,85) and isColor(970,595,0xe5d2bf,85) and isColor(941,592,0xf6e2cd,85) and isColor(1013,593,0xf8e4cf,85) and isColor(1005,588,0xf7e3ce,85) and isColor(708,616,0xffffff,85) and isColor(1096,526,0xe4b767,85) and isColor(1116,515,0xba8f4d,85) then
+		return true
+	else
+		return false
+	end
+end
+
+--名字重复
+function cp.conflict_name(...)
+	if isColor(1107,614,0x5f703c,85) and isColor(848,587,0x5e703e,85) and isColor(1100,526,0xe0b464,85) and isColor(708,616,0xffffff,85) and isColor(587,261,0xfcfcfc,85) and isColor(602,263,0xfefefe,85) and isColor(555,261,0xfdfdfd,85) and isColor(549,268,0xfefefe,85) and isColor(1115,50,0x787d71,85) then
+		return true
+	else
+		return false
+	end
+end
+
 --关闭邀请界面
 function cp.close_invite(...)
-	if (isColor( 130,  542, 0x3b4875, 85) and 
-		isColor( 172,  541, 0x3e4872, 85) and 
-		isColor( 170,  790, 0x3d4872, 85) and 
-		isColor( 136,  789, 0x3e4872, 85) and 
-		isColor( 442,  559, 0x935530, 85) and 
-		isColor( 449,  757, 0x945530, 85) and 
-		isColor( 454,  648, 0xffe372, 85) and 
-		isColor( 452,  702, 0xffe372, 85) and 
-		isColor( 493,  749, 0x9bc3e5, 85) and 
-		isColor( 503,  604, 0x9f4454, 85)) then
+	if isColor(658,514,0x3e4872,85) and isColor(768,252,0x514127,85) and isColor(752,253,0xcea558,85) and isColor(787,251,0xcea355,85) and isColor(765,238,0xcea053,85) and isColor(519,256,0xdec563,85) and isColor(393,266,0x595144,85) and isColor(408,427,0x2d2822,85) then
 		return true
 	else
 		return false
@@ -148,26 +119,9 @@ end
 
 --选择出生地界面
 function cp.choose_hometown()
-	if (isColor(  26,  959, 0x3e4773, 85) and 
-		isColor(  68, 1286, 0x3e4672, 85) and 
-		isColor(  64,  953, 0x181a23, 85) and 
-		isColor(  19, 1288, 0x1d1f2b, 85) and 
-		isColor( 439, 1192, 0x4b2610, 85) and 
-		isColor( 440, 1031, 0x4a2610, 85) and 
-		isColor(  11,  744, 0x413d3a, 85) and 
-		isColor(  27,  778, 0xffffff, 85) and 
-		isColor(  11,  774, 0xffffff, 85)) then
+	if isColor(923,264,0xf5f5f4,85) and isColor(941,265,0xffffff,85) and isColor(956,265,0xd8d6d5,85) and isColor(973,271,0xf1f1f0,85) and isColor(988,258,0xf8f8f8,85) and isColor(1031,599,0x3e4872,85) and isColor(829,599,0x3e4872,85) and isColor(930,599,0xeedbc6,85) and isColor(664,616,0xffffff,85) and isColor(661,630,0xffffff,85) then		
 		return true
-	elseif (isColor( 382,  843, 0xa9d201, 85) and 
-		isColor( 629,  879, 0xb7e307, 85) and 
-		isColor( 685,  497, 0xb9e509, 85) and 
-		isColor( 431,  229, 0xa7d001, 85) and 
-		isColor( 192, 1141, 0xcab665, 85) and 
-		isColor( 329,  255, 0xd52a12, 85) and 
-		isColor( 224,  749, 0x9aaf34, 85) and 
-		isColor( 247,  435, 0xb35d18, 85) and 
-		isColor(  30,  643, 0xfcfcfc, 85) and 
-		isColor(  13,  764, 0xfefefe, 85)) then
+	elseif isColor(984,470,0xcdb565,85) and isColor(217,358,0xd42b13,85) and isColor(718,311,0xb3df04,85) and isColor(1042,425,0xb1a866,85) and isColor(1064,453,0x2d6931,85) and isColor(683,77,0x6b9bbe,85) and isColor(751,106,0x99be01,85) and isColor(921,80,0x729fc2,85) then
 		return true
 	else
 		return false
@@ -177,25 +131,31 @@ end
 
 --判断是否处于游戏主界面中
 function cp.is_main_ui()
-	--找右下角的菜单按钮
-	local found_menu = false
-	x,y = findMultiColorInRegionFuzzy( 0xffffff, "-3|13|0xc4c4c4,0|14|0xffffff,10|16|0xd9d8d8,11|22|0xffffff,23|6|0xffffff,22|14|0xf9f8f8,23|21|0xffffff,21|21|0xdbd9d9,23|12|0xffffff", 90, 11, 1253, 73, 1318)
-	if x ~= -1 and y ~= -1 then
-		found_menu = true
-	end
 	--找右上角的地图图标
 	local found_map = false
-	x,y = findMultiColorInRegionFuzzy( 0xe3ca95, "15|13|0x897256,17|23|0x9c4629,16|31|0x978464,17|44|0xb69264,26|30|0xa6492b,29|23|0xe1cfa3,21|5|0xdac396,24|32|0xeee1c6,13|24|0x7e4721", 90, 659, 1079, 713, 1326)
+	x,y = findMultiColorInRegionFuzzy( 0xa95631, "4|1|0xdecaa0,5|6|0x9d4527,-15|18|0xdcc290,10|10|0x978464,-1|15|0x8e7558,4|24|0xc4a974", 80, 1065, 35, 1123, 73)
 	if x ~= -1 and y ~= -1 then
 		found_map = true
 	end
-	return found_menu and found_map
+	
+	local found_icon = false
+	x,y = findMultiColorInRegionFuzzy( 0x83a145, "-52|3|0xf1e411,37|-4|0xcac9c8", 90, 89, 44, 229, 96)
+	if x ~= -1 and y ~= -1 then
+		found_icon = true
+	end
+	local found_arraw = false
+	
+	x,y = findMultiColorInRegionFuzzy( 0xa3a2a0, "1|18|0x8d8b87,13|8|0xc6c4be", 90, 1096, 87, 1135, 126)
+	if x ~= -1 and y ~= -1 then
+		found_arraw = true
+	end
+
+	return found_map and found_icon and found_arraw
 end
 
 --判断是否处于任务界面中
 function cp.is_task_ui()
-	x,y = findMultiColorInRegionFuzzy( 0xfee272, "105|-56|0xf7d09b,127|-4|0xfdecc2,117|-41|0xfadfb1,42|237|0x7d7e7c,50|507|0xad8053,60|252|0xdedcda,-7|-25|0x5a422b,-7|-59|0x5a442c,103|-20|0xe9c490", 90, 570, 64, 734, 664)
-	if x ~= -1 and y ~= -1 then
+	if isColor(68,21,0xf5e7c0,85) and isColor(67,44,0xf2c993,85) and isColor(79,31,0xfae0b2,85) and isColor(84,22,0xfdeec5,85) and isColor(96,23,0xd1c29f,85) and isColor(95,43,0xf6d099,85) and isColor(113,37,0xf8d8a5,85) and isColor(1008,63,0x52422b,85) and isColor(1008,73,0xd3aa5a,85) and isColor(30,63,0x628c2f,85) then	
 		return true
 	else
 		return false
@@ -207,38 +167,32 @@ end
 function cp.is_dialog_ui()
 	--对话框有不同的模式
 	local arr1 = {
-		{   36, 1041, 0x2c1d0b},
-		{   37, 1041, 0x3c2406},
-		{   38, 1041, 0xa78e5e},
-		{   39, 1041, 0xbfa571},
-		{   54, 1041, 0xaa9a82},
-		{   55, 1041, 0x634e36},
-		{   56, 1041, 0x412b1e},
-		{   58, 1026, 0xc0b4a3},
-		{   57, 1026, 0x8c7c68},
-		{   56, 1056, 0x5c4a35},
-		{   57, 1056, 0x8b7b66},
-		{   58, 1056, 0xc0b4a3},
+		{875,586,0xe0d7ca},
+		{874,586,0xc5bbab},
+		{873,586,0x63503a},
+		{887,605,0x3a2409},
+		{887,604,0x7f673d},
+		{887,603,0xbba26f},
+		{887,602,0xc2a975},
+		{898,589,0xc8bba7},
+		{899,589,0x84735e},
+		{900,589,0x56422e},
 	}
 	
 	local arr2 = {
-		{   39, 1083, 0xbda470},
-		{   38, 1083, 0x8d7549},
-		{   37, 1083, 0x3c2407},
-		{   59, 1095, 0xe0d7ca},
-		{   60, 1095, 0xb4a898},
-		{   61, 1095, 0x6e5c47},
-		{   53, 1083, 0xdccdb4},
-		{   54, 1083, 0xc4b69d},
-		{   55, 1083, 0x645037},
-		{   58, 1068, 0xdad0c1},
+		{923,602,0xc0a773},
+		{918,595,0xd0bc97},
+		{913,587,0xe1d7c7},
+		{934,586,0xe1d9cb},
+		{926,594,0xd3bf9d},
+		{923,591,0xdacbb0},
 	}
-	x,y = findMultiColorInRegionFuzzyByTable(arr1, 70, 5, 1000, 122, 1105)
-
+	x,y = findMultiColorInRegionFuzzyByTable(arr1, 90, 861, 548, 951, 639)
+  
 	if x ~= -1 and y ~= -1 then
 		return true	
 	end
-	x,y = findMultiColorInRegionFuzzyByTable(arr2, 70, 5, 1000, 122, 1105)
+	x,y = findMultiColorInRegionFuzzyByTable(arr2, 90, 861, 548, 951, 639)
 
 	if x ~= -1 and y ~= -1 then
 		return true	
@@ -247,84 +201,37 @@ function cp.is_dialog_ui()
 	return false
 end
 
-function cp.is_dialog_ui_fight()
+function cp.is_dialog_ui_interact()
 	local found_arrow = false
---	x,y = findMultiColorInRegionFuzzy( 0x5a411e, "1|0|0xb79e6b,21|15|0xd1c7b8,20|15|0xa49583,19|15|0x6d5b46,16|1|0xdaccb4,17|1|0x928068,18|1|0x614c34", 90, 0, 1242, 162, 1292)	
---	if x ~= -1 and y ~= -1 then
---		found_arrow = true	
---	end
+	x,y = findMultiColorInRegionFuzzy( 0xe1d9cd, "7|9|0xd1be9b,12|16|0xc2a976,24|1|0xd5cbbb,12|6|0xdbcaaf,12|18|0x8f774a", 90, 1042, 514, 1109, 637)
+	if x ~= -1 and y ~= -1 then
+		found_arrow = true	
+	end
+	
 	local found_button = false
-	if (isColor( 240, 1007, 0x73302f, 85) and 
-		isColor( 238, 1005, 0x6e2f2d, 85) and 
-		isColor( 239, 1290, 0x723d3e, 85) and 
-		isColor( 238, 1291, 0x492a2c, 85) and 
-		isColor( 239, 1292, 0x2a1918, 85) and 
-		isColor( 302, 1290, 0x6b322f, 85) and 
-		isColor( 303, 1291, 0x462620, 85) and 
-		isColor( 304, 1291, 0x2c1f17, 85) and 
-		isColor( 300, 1003, 0x713131, 85) and 
-		isColor( 300, 1002, 0x312323, 85)) then
+	if isColor(1091,433,0x753131,85) and isColor(1095,384,0x753131,85) and isColor(861,387,0x733131,85) and isColor(860,434,0x762f30,85) then		
+		found_button = true
+	elseif isColor(862,386,0x3e4672,85) and isColor(865,430,0x3e4772,85) and isColor(1085,428,0x3e4872,85) and isColor(1086,387,0x3e4872,85) then
 		found_button = true
 	end
---	dialog(tostring(found_button), 0)
 
---	return found_arrow and found_button
-	return found_button
+	return found_arrow and found_button
 
 end	
 	
 --判断是否处于过场动画中
 function cp.is_mv_ui()
-	local arr = {
-		{  704, 1248, 0x5d523c},
-		{  705, 1250, 0x3c342a},
-		{  703, 1271, 0x56473c},
-		{  704, 1271, 0x382f2c},
-		{  718, 1271, 0xb1aa92},
-		{  717, 1271, 0x504a3c},
-		{  716, 1271, 0x2b231c},
-		{  738, 1250, 0x9e9889},
-		{  739, 1250, 0x696357},
-		{  740, 1250, 0x2e271f},
-		{  727, 1319, 0x43362d},
-		{  727, 1318, 0x2f2b22},
-		{  727, 1317, 0xaba38e},
-		{  734, 1313, 0x39342b},
-		{  734, 1312, 0x8b8677},
-		{  734, 1311, 0xd2cebb},
-		{  734, 1310, 0xa09d8f},
-		{  721, 1311, 0xaca48c},
-		{  721, 1312, 0x77705c},
-		{  721, 1313, 0x241e13},
-	}
-	--判断右下角的返回文字和箭头
-	x,y = findMultiColorInRegionFuzzyByTable(arr, 90, 697, 1212, 749, 1332)
-	if x ~= -1 and y ~= -1 then
+	--判断跳过文字
+	if isColor(1071,11,0xd2cbb8,85) and isColor(1101,11,0xd8d1be,85) and isColor(1065,18,0xbab39e,85) and isColor(1099,21,0xb4ac96,85) then
 		return true
+	else
+		return false
 	end
 	
-	--取色列表(2)
-	arr = {
-		{729,1316,0xc5bdaa},
-		{725,1313,0xb4aa94},
-		{735,1311,0xc0b4ae},
-		{731,1315,0xc1bba8},
-		{728,1294,0xbab39e},
-		{736,1294,0xd9d3bf},
-		{738,1279,0xc7c0af},
-		{722,1254,0xb1aa94},
-		{731,1255,0xcdc6b1},
-		{723,1269,0x322c22},
-	}
-	x,y = findMultiColorInRegionFuzzyByTable(arr, 90, 697, 1212, 749, 1332)
-	if x ~= -1 and y ~= -1 then
-		return true
-	end
-	return false
 end
 
 function cp.is_task_reward()
-	x,y = findMultiColorInRegionFuzzy( 0x60713e, "27|-14|0x60713e,46|-207|0x60713e,22|-141|0x60713e,16|-102|0xd7c5b2,16|-109|0xf6e2cd,23|-119|0xf5e1cc,26|-94|0xebd8c4,20|-85|0x302a1f,31|-84|0xd6c4b1", 90, 148, 1075, 234, 1316)
+	x,y = findMultiColorInRegionFuzzy( 0x60713e, "-111|15|0x60713e,-81|12|0xd8c6b3,-47|17|0xe8d5c1", 90, 910, 434, 1127, 523)
 	if x ~= -1 and y ~= -1 then
 		return true
 	else
@@ -361,38 +268,39 @@ function cp.get_guide_arraw()
 	
 	--x, y = findImageInRegionFuzzy("arraw_5oclock.png", 90, 0, 0, 749, 1333, 0, 1);
 	--识别四点钟方向的箭头
-	x,y = findMultiColorInRegionFuzzy( 0xa77725, "2|45|0xb7721b,14|43|0xffe997,19|37|0xd49e2e,18|12|0xc78d26,39|-16|0xe2a93e,59|2|0xfde66c,39|26|0xddbe67,26|35|0xdea531,37|44|0xf1c35b", 90, 0, 0, 749, 1333)	
+	x,y = findMultiColorInRegionFuzzy( 0xf7b638, "14|-2|0xfbd254,27|-6|0xfde078,25|-11|0xe0ad38,30|-29|0xfccd5a,13|-26|0xfec443,-4|-43|0xf9dd64,-11|-29|0xfcc141,1|-11|0xa67423,23|-16|0xe4aa31", 90, 0, 0, 1135, 639)
 	if x ~= -1 and y ~= -1 then
-		x = x - 20
-		y = y + 60
+		x = x + 50
+		y = y + 20
 		return x, y
 	end
 	
 	--识别四点钟方向的箭头(2)
-	x,y = findMultiColorInRegionFuzzy( 0xeab036, "4|20|0xfbe05c,13|25|0xfed04c,17|27|0xe8af2f,23|23|0xe4aa34,40|5|0xffc742,52|-15|0xfdcd48,38|-20|0xffc641,35|-28|0xe9a835,37|30|0xfeca4d", 90, 0, 0, 749, 1333)
+	x,y = findMultiColorInRegionFuzzy( 0xd7a12f, "5|8|0xfeeb92,-11|12|0xf7cf4c,-21|12|0xf6be43,-34|-18|0xfbbb3e,-28|-24|0xf0b23d,6|-18|0xf3c755,4|9|0xfeec8e,-24|14|0xedb036,-23|1|0xad7921", 90, 0, 0, 1135, 639)
 	if x ~= -1 and y ~= -1 then
-		x = x - 20
-		y = y + 60
+		x = x + 50
+		y = y + 20
 		return x, y
 	end
 
 	
-	--识别八点钟方向的箭头
-	x,y = findMultiColorInRegionFuzzy( 0xc99741, "4|7|0xfde888,7|17|0xe8af32,5|24|0xfcbb3b,1|40|0xfcd352,35|49|0xfbc83c,42|55|0xffeb6f,56|35|0xf5c24c,28|7|0xffd179,44|-3|0xd1972c", 90, 0, 0, 749, 1333)
+	--识别八点钟方向的箭头	
+	x,y = findMultiColorInRegionFuzzy( 0xf9bf3f, "12|23|0xdaa534,6|28|0xffed99,2|20|0xfce759,44|-5|0xfce267,40|-2|0xfdc53c,29|-21|0xe9b03d,11|-1|0xa87522,22|16|0xf9ba44", 90, 0, 0, 1135, 639)
 	if x ~= -1 and y ~= -1 then
-		x = x - 20
+		y = y + 40
 		return x, y
 	end
 	--识别两点钟方向的箭头(1)
-	x,y = findMultiColorInRegionFuzzy( 0xe1a032, "-1|-13|0xfbd866,-4|-15|0xdba532,-37|-55|0xffee72,-40|-43|0xf2b441,-47|-33|0xfecb44,-25|-8|0xffd385,-28|1|0xe0a635,4|-39|0xe4bd4e,-13|-33|0xfcdb65", 90, 0, 0, 749, 1333)
+	x,y = findMultiColorInRegionFuzzy( 0xf3c357, "-14|-13|0xf9dd63,4|-34|0xffd051,12|-41|0xe0a731,18|-43|0xdba533,27|-47|0xffeb8d,32|-19|0xe8ac35,20|-19|0xa47021,12|-41|0xe0a731,18|-43|0xdba533", 90, 0, 0, 1135, 639)	
 	if x ~= -1 and y ~= -1 then
 		--dialog(x..':'..y, 0)
-		x = x + 20
-		y = y + 20
+		x = x + 40
+		y = y - 60
 		return x, y
 	end
+	
 	--识别两点钟方向的箭头(2)
-	x,y = findMultiColorInRegionFuzzy( 0xfce46a, "35|41|0xf8d35e,38|21|0xeebb41,38|50|0xffea8c,6|50|0xf7ba40,13|34|0xfabb44,-13|18|0xfbc642,-5|8|0xf2b039,15|33|0xfbbb41,36|28|0xfebc3f", 90, 0, 0, 749, 1333)
+	x,y = findMultiColorInRegionFuzzy( 0xf8be3f, "29|23|0xfec642,41|2|0xfcdc63,36|-2|0xe7b73e,30|-5|0xeeb134,22|-17|0xf9c747,-8|1|0xf6d960,-5|3|0xecae3a,19|18|0xa37128,39|13|0xedbe41", 90, 0, 0, 1135, 639)
 	if x ~= -1 and y ~= -1 then
 		--dialog(x..':'..y, 0)
 		x = x + 40
@@ -401,10 +309,10 @@ function cp.get_guide_arraw()
 	end
 	
 	--识别十点钟方向的箭头
-	x,y = findMultiColorInRegionFuzzy( 0xffcf4b, "24|2|0xf5c64e,38|3|0xebba3f,34|10|0xfcdb5c,32|26|0xffd27c,15|31|0xfbb93d,1|42|0xfabc3c,-9|40|0xedae3b,-13|39|0xf6da61,41|41|0xe3a72e", 90, 0, 0, 749, 1333)
+	x,y = findMultiColorInRegionFuzzy( 0xfde58a, "7|20|0xfdc43f,4|12|0xf2ba3b,22|20|0xfabc3c,29|10|0xa67525,27|4|0xefae3d,35|43|0xfde469,47|25|0xd7a033,30|11|0xc08a30,8|14|0xe5aa33", 90, 0, 0, 1135, 639)	
 	if x ~= -1 and y ~= -1 then
 		--dialog(x..':'..y, 0)
-		x = x + 20
+		x = x - 20
 		y = y - 20
 		return x, y
 	end
@@ -426,10 +334,9 @@ end
 
 --悬浮的道具使用按钮
 function cp.use_item(...)
-	x,y = findMultiColorInRegionFuzzy( 0x3c4a70, "1|43|0x3c4672,2|134|0x3d496f,41|133|0x3d4a74,19|78|0xf8e4cf,15|57|0xf1dec9,26|48|0xf8e4cf,30|86|0xf2dfca", 90, 0, 0, 749, 1333)
+	x,y = findMultiColorInRegionFuzzy( 0x3f4773, "3|27|0x3e4772,108|29|0x3e4972,97|5|0x3d4771,44|14|0xf1dec9,66|15|0xf5e1cc,73|22|0xdac8b5,49|7|0xf5e1cc", 90, 0, 0, 1135, 639)
 	if x ~= -1 and y ~= -1 then
-		x = x + 20
-		y = y + 60
+		x = x + 30
 		return x, y
 	else
 		return -1, -1
@@ -439,9 +346,9 @@ end
 
 --成年礼的石板
 function cp.adult_ceremony(...)
-	if isColor(319,538,0x373534,85) and isColor(354,534,0x939393,85) and isColor(407,663,0x858584,85) and isColor(325,809,0x484543,85) and isColor(425,817,0x989897,85) and isColor(516,743,0x8f8f8e,85) and isColor(459,606,0x6f6c6c,85) and isColor(518,521,0xd2c2c0,85) and isColor(447,530,0x907273,85) and isColor(303,777,0x6ea46f,85) then
+	if isColor(441,197,0xcdbebb,85) and isColor(441,384,0x537e59,85) and isColor(690,391,0x688772,85) and isColor(703,182,0x717d6f,85) and isColor(689,202,0x353230,85) and isColor(450,358,0x3d3c3b,85) and isColor(729,302,0x859b83,85) then		
 		return true
-	elseif isColor(317,543,0x343432,85) and isColor(508,808,0x383634,85) and isColor(666,686,0xfeefc7,85) and isColor(662,610,0xfdebc1,85) and isColor(498,813,0xc4c3c0,85) and isColor(325,812,0x4b4847,85) and isColor(294,811,0x637f6e,85) and isColor(532,842,0xa4bda2,85) and isColor(344,497,0x79983e,85) then
+	elseif isColor(433,201,0xc6c1bf,85) and isColor(461,369,0x363533,85) and isColor(434,391,0x398845,85) and isColor(702,332,0x7e7675,85) and isColor(721,308,0x6d8653,85) and isColor(704,196,0xb5b5b3,85) and isColor(691,205,0x3a3836,85) and isColor(580,285,0x9d9d9c,85) then
 		return true
 	elseif isColor(109,711,0xffffff,85) and isColor(110,743,0xffffff,85) and isColor(87,762,0xffffff,85) and isColor(91,779,0xfefefe,85) and isColor(87,722,0xfefefe,85) and isColor(86,700,0xffffff,85) and isColor(95,687,0xffffff,85) and isColor(86,565,0xffffff,85) and isColor(102,552,0xffffff,85) and isColor(490,568,0xe0730e,85) then
 		return true
@@ -451,7 +358,7 @@ function cp.adult_ceremony(...)
 end
 
 --出生的迅猛龙领养
-function cp.adopt_pet(...)
+function cp.adopt_xml_pet(...)
 	if isColor(647,142,0xfff0dd,85) and isColor(661,161,0xfff0dd,85) and isColor(653,195,0xdccfbd,85) and isColor(667,192,0xfff0dd,85) and isColor(669,205,0xfff0dd,85) and isColor(649,215,0xfff0dd,85) and isColor(655,247,0xfff0dd,85) and isColor(671,248,0xfeefdc,85) and isColor(670,238,0xfff0dd,85) then
 		return true
 	else
@@ -459,20 +366,137 @@ function cp.adopt_pet(...)
 	end
 end
 
+--获取宠物页面
+function cp.adopt_pet(...)
+	if isColor(413,60,0x935430,85) and isColor(522,49,0xffe372,85) and isColor(532,51,0xfde171,85) and isColor(546,54,0xf3d86d,85) and isColor(586,48,0xffe372,85) and isColor(600,45,0xffe372,85) and isColor(729,64,0x94552e,85) and isColor(306,107,0x1e1711,85) and isColor(1111,99,0x251e17,85) and isColor(704,128,0x282522,85) then
+		return true
+	else
+		return false
+	end
+end
+
+
 --孵宠物蛋
 function cp.pet_egg(...)
-	if isColor(322,549,0x6d5b3d,85) and isColor(311,585,0x715c3b,85) and isColor(364,455,0x76643f,85) and isColor(602,1120,0xfab44f,85) and isColor(507,1144,0x564827,85) and isColor(394,1184,0x493d22,85) and isColor(595,306,0x907a48,85) and isColor(595,345,0x997f49,85) and isColor(629,541,0x7e6b40,85) and isColor(621,586,0x7d6a40,85) then
+	if isColor(925,375,0x5c604a,85) and isColor(418,97,0x7f6c41,85) and isColor(949,164,0xffca5f,85) and isColor(670,236,0xbda258,85) and isColor(306,133,0x8c7442,85) and isColor(952,168,0xffc75c,85) and isColor(500,174,0x715930,85) and isColor(599,119,0x795c30,85) and isColor(601,109,0x756038,85) and isColor(644,93,0x8e7441,85) then	
 		return true
-	elseif isColor(152,925,0x846b4a,85) and isColor(243,1011,0x8c7350,85) and isColor(239,701,0x8a6e3e,85) and isColor(561,178,0x211810,85) and isColor(493,157,0x534339,85) and isColor(497,218,0x392d28,85) and isColor(499,155,0x726250,85) and isColor(611,1225,0x211810,85) and isColor(464,815,0x4a403c,85) and isColor(192,1256,0x524128,85) then
+	elseif isColor(511,427,0x9a7d4c,85) and isColor(683,270,0x3e332b,85) and isColor(685,226,0x4a413a,85) and isColor(176,232,0x4f3e35,85) and isColor(172,173,0x2b2017,85) and isColor(1014,561,0x503d28,85) and isColor(929,461,0x7f6847,85) and isColor(754,401,0x917653,85) and isColor(1082,115,0x241b13,85) and isColor(212,97,0x382f25,85) then
 		return true
 	else 
 		return false
 	end
 end
 
+--福利页面
+function cp.wealfare_exp(...)
+	if isColor(935,86,0xd2a659,85) and isColor(599,87,0xf9e0b4,85) and isColor(519,90,0xf9dcad,85) and isColor(682,138,0xcbf05f,85) and isColor(746,167,0x79a035,85) and isColor(765,161,0x89af3c,85) and isColor(519,99,0xf5cd97,85) and isColor(546,81,0xd0c2a2,85) then
+		return true
+	else
+		return false
+	end
+end
+
 --活动页面 
 function cp.is_activity_ui(...)
-	if isColor(121,36,0x812927,85) and isColor(123,61,0x9a3b39,85) and isColor(96,66,0x2c2214,85) and isColor(595,31,0xfe9fbc,85) and isColor(662,155,0xf9daa8,85) and isColor(389,54,0xb1b7b9,85) and isColor(204,52,0xe3ddd5,85) and isColor(226,24,0x7799d6,85) and isColor(508,61,0xb6b6ad,85) and isColor(90,259,0x5d462d,85) then
+	if isColor(25,46,0xf0be3b,85) and isColor(66,44,0x87eaf0,85) and isColor(39,536,0x7e2624,85) and isColor(142,556,0xf8e4cf,85) and isColor(362,82,0xb6322c,85) and isColor(99,62,0xf5f3db,85) and isColor(1102,67,0x94806e,85) and isColor(1104,53,0x392c24,85) then
+		return true
+	else
+		return false
+	end
+end
+
+--日常任务页面
+function cp.daily_task(...)
+	x,y = findMultiColorInRegionFuzzy( 0x5a9a34, "2|12|0x5a9c36,58|-2|0x5acc74,58|13|0x5acc74", 90, 0, 0, 1135, 639)
+	return x, y
+end
+
+--日常任务委托（活动页面）
+function cp.daily_task_weituo(...)
+	if isColor(677,435,0x3e4773,85) and isColor(841,471,0x3e4a70,85) and isColor(772,454,0xead6c3,85) and isColor(745,444,0xd0bfad,85) and isColor(324,176,0xf9de6f,85) and isColor(289,170,0xe3c966,85) and isColor(312,163,0xfbe070,85) and isColor(297,175,0xf9de70,85) and isColor(839,168,0x9e9285,85) and isColor(839,177,0x49453e,85) then		
+		return true
+	else
+		return false
+	end
+end
+
+--加美航空
+function cp.jiamei_air_ui(...)
+	if isColor(58,562,0x916d3e,85) and isColor(186,550,0x9d886c,85) and isColor(118,596,0xc7b393,85) and isColor(1011,595,0x69593e,85) and isColor(1094,527,0x94ae2a,85) and isColor(1030,446,0xba7840,85) and isColor(1052,453,0xa6422c,85) and isColor(881,510,0xd65223,85) then
+		return true
+	else
+		return false
+	end	
+end
+
+--成长之路
+function cp.is_growing_path_ui(...)
+	if isColor(567,619,0xf6da6f,85) and isColor(558,611,0xf5d56f,85) and isColor(576,611,0xfbea78,85) and isColor(567,39,0x935430,85) and isColor(548,45,0xfae0b1,85) and isColor(618,56,0xf2ca94,85) and isColor(1093,13,0xc5bfab,85) and isColor(1089,24,0xbab29a,85) then
+		return true
+	else
+		return false
+	end
+end
+
+--是否自动存在装备图腾界面
+function cp.totem_summon_auto_equip(...)
+	if isColor(497,102,0xdbdbda,85) and isColor(514,160,0xffffff,85) and isColor(498,175,0xf5f6f5,85) and isColor(514,182,0xffffff,85) and isColor(156,988,0x1e1c2b,85) and isColor(187,1031,0x3e4872,85) and isColor(185,1135,0x3e4872,85) and isColor(185,1114,0xf8e4cf,85) and isColor(601,569,0x392942,85) and isColor(635,570,0x5e4073,85) then
+		return true
+	else
+		return false
+	end
+end
+
+--是否自动训练图腾
+function cp.totem_summon_auto_train(...)
+	if isColor(185,232,0x3e4872,85) and isColor(198,553,0x3d4770,85) and isColor(498,98,0xffffff,85) and isColor(205,45,0x372f47,85) and isColor(653,567,0x6a467c,85) and isColor(203,1159,0x3d4872,85) and isColor(168,1017,0x3e4772,85) and isColor(676,1167,0xd1a75a,85) and isColor(168,969,0x181821,85) then		
+		return true
+	else
+		return false
+	end
+end
+
+--是否存在主角按钮
+function cp.get_protagonist_button(...)
+	--x, y = findMultiColorInRegionFuzzy( 0xececc7, "17|-17|0x15050c,3|-14|0x2a0d05,19|8|0xffffd7,17|-10|0xf3c1a4,3|-7|0xc89a82", 90, 578, 571, 1126, 639)
+	x,y = findMultiColorInRegionFuzzy( 0x12080d, "10|17|0xf4f4ce,13|4|0xfbcaad,18|4|0xfcd1ae", 90, 578, 571, 1126, 639)
+	if x ~= -1 and y ~= -1 then
+		return x, y
+	else
+		return -1, -1
+	end
+end
+
+--充值界面
+function cp.charge_ui(...)
+	if isColor(50,59,0x3da1d5,85) and isColor(1107,65,0x94806e,85) and isColor(1120,54,0x94806e,85) and isColor(1104,74,0x94806e,85) and isColor(1121,74,0x94806e,85) and isColor(89,61,0xf0d6a8,85) and isColor(125,72,0xf6cf98,85) and isColor(124,51,0xf9e9c1,85) and isColor(107,50,0xfdeec7,85) and isColor(36,69,0x2f81bf,85) then
+		return true
+	else
+		return false
+	end
+end
+
+--抓出生凯比
+function cp.catch_pet(...)
+	if isColor(269,257,0xe2be9d,85) and isColor(265,310,0xa26629,85) and isColor(506,405,0xf15314,85) and isColor(536,407,0xd64c14,85) and isColor(556,413,0xdd4e14,85) and isColor(572,401,0xf45414,85) and isColor(645,406,0xfbfbfb,85) and isColor(624,404,0xffffff,85) and isColor(839,267,0xc9766e,85) then
+		return true
+	else
+		return false
+	end
+end
+
+--长毛象公交车UI
+function cp.elephant_bus_ui(...)
+	if isColor(1047,560,0xdfce2f,85) and isColor(1065,562,0xf7e25c,85) and isColor(1040,596,0xc1982a,85) and isColor(1020,589,0xead54a,85) and isColor(1013,573,0xe1c732,85) and isColor(191,582,0xf6f1c2,85) and isColor(935,585,0x485e0e,85) then
+		return true
+	else
+		return false
+	end
+end
+
+--幼年红暴龙拼图界面
+function cp.get_moka(...)
+	if isColor(440,191,0xee9b23,85) and isColor(454,167,0x5fd1f7,85) and isColor(520,243,0xe2dbd6,85) and isColor(486,80,0xfbe4b7,85) and isColor(504,76,0xfce9be,85) and isColor(525,73,0xfdecc3,85) and isColor(638,94,0xf1cd99,85) and isColor(643,75,0xfce9bf,85) and isColor(574,88,0xf5d5a5,85) then
 		return true
 	else
 		return false
