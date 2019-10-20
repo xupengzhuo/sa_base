@@ -8,10 +8,10 @@ function tk.daily_weituo(...)
 	local buy_item = false
 	while (true) do
 		--等待跳出村长的委托对话框
-		x,y = findMultiColorInRegionFuzzy( 0x8c6836, "168|36|0x8c6836,57|23|0xf7e3ce,61|15|0xf8e4cf,76|20|0xebd8c3,83|19|0xf2deca,61|25|0xf8e4cf,28|38|0x8c6937,94|38|0x8c6937,64|19|0x3c3225", 90, 1017, 384, 1120, 488)
+		x,y = findMultiColorInRegionFuzzy( 0x8c6836, "80|30|0x8c6937,33|16|0xf7e3ce,30|23|0xf8e4cf,59|28|0xdac7b4,55|20|0xf8e4cf", 90, 832, 98, 1119, 487)
 		if x ~= -1 and y ~= -1 then
 			tap(x, y, 50, "click.png")
-			mSleep(10000)
+			mSleep(8000)
 		end
 
 		--上交道具的页面，点击购买按钮
@@ -121,9 +121,9 @@ function tk.growing_path_reward(...)
 			if x ~= -1 and y ~= -1 then
 				ac.weipasi_line()
 			end
-		
+			
 			--选择一只狗作为奖励
-			if isColor(567,348,0x796f66,85) and isColor(566,141,0xeae9e8,85) and isColor(469,150,0xffffff,85) and isColor(637,152,0xfefefe,85) and isColor(597,157,0xececeb,85) and isColor(802,543,0x413424,85) and isColor(326,523,0x5f4d35,85) and isColor(914,103,0xcea55a,85) and isColor(611,145,0xffffff,85) and isColor(607,139,0xffffff,85) then
+			if isColor(892,85,0xd2a957,85) and isColor(395,339,0x2fa9f5,85) and isColor(734,545,0x30abfa,85) and isColor(557,512,0x302c2a,85) and isColor(794,514,0x78664d,85) and isColor(402,547,0x30adfc,85) then
 				tap(745, 484, 50, "click.png")
 				mSleep(1000)
 				tap(950, 532, 50, "click.png")
@@ -132,26 +132,42 @@ function tk.growing_path_reward(...)
 			end
 		end
 	end
-	--找到点击领取字样
-	
-	
---	::guide_weituo::
---	x,y = cp.get_guide_arraw()
---	if x ~= -1 and y ~= -1 then
---		tap(x, y, 50, "click.png")
---		mSleep(500)
---		goto guide_weituo
---	end
-	
---	--选择一只狗作为奖励
---	if isColor(640,615,0xf8d5a2,85) and isColor(648,679,0xfae0b2,85) and isColor(658,753,0x7d776e,85) and isColor(648,1052,0xd1a65a,85) and isColor(651,1067,0x534325,85) and isColor(578,740,0xffffff,85) and isColor(651,720,0xf8e2b6,85) and isColor(658,671,0xfdeec6,85) and isColor(639,614,0xf7d4a0,85) and isColor(635,669,0xf6ce97,85) then
---		tap(130, 475, 50, "click.png")
---		mSleep(1000)
---		tap(120, 1110, 50, "click.png")
---	end
-	
-	
+
 end
+	
+function tk.first_totem_summon(...)
+	dialog(111111)
+	tap(920, 480, 50, "click.png")
+	while (true) do
+		::guide::
+		x,y = cp.get_guide_arraw()
+		if x ~= -1 and y ~= -1 then
+			tap(x, y, 50, "click.png")
+			mSleep(500)
+			goto guide
+		end
+		
+		if cp.is_task_reward() then
+			tap(1020, 475, 50, "click.png")
+			mSleep(500)
+		end
+		
+		--培养图腾
+		if isColor(173,461,0x3e4772,85) and isColor(484,495,0x3d4972,85) and isColor(316,473,0xebd9c4,85) and isColor(458,406,0x1a1514,85) and isColor(298,589,0x1e343a,85) and isColor(348,590,0x1e343a,85) then
+			tap(330, 480, 50, "click.png")
+			mSleep(1000)
+			tap(550, 550, 50, "click.png")
+			mSleep(1000)
+			tap(300, 550, 50, "click.png")
+			mSleep(1000)
+			tap(935, 85, 50, "click.png")
+			mSleep(1000)
+			tap(1000, 60, 50, "click.png")
+			return
+		end
+	end
+end
+
 
 
 return tk

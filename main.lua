@@ -26,11 +26,13 @@ function start_game(...)
 		
 		if cp.need_update() then
 			tap(566, 435, 50, "click.png")
+			mSleep(500)
 		end
 		
 		if cp.start_screen_announcement() then 
 			--关掉游戏公告
 			tap(1025, 40, 50, "click.png")
+			mSleep(500)
 			break
 		end
 	end
@@ -72,6 +74,7 @@ end
 
 function create_new_role(...)
 	local need_skip_mv = true
+	local try = 0
 	while true do
 		-- 跳过过场动画
 		mSleep(500)
@@ -115,13 +118,18 @@ function create_new_role(...)
 			tap(570, 510, 50, "click.png")
 			mSleep(500)
 		end
-		
+
 		if cp.choose_hometown() then
 			need_skip_mv = false
+			tap(550, 480, 50, "click.png")
+			mSleep(2000)
 			-- 选择渔村进入游戏
 			tap(220, 270, 50, "click.png")
-			mSleep(1500)
-			tap(960, 600, 50, "click.png")
+			mSleep(2000)
+			tap(960, 600, 100, "click.png")
+			mSleep(2000)
+			--解决进入游戏失败的问题
+			return
 		end
 	end
 end
@@ -129,14 +137,23 @@ end
 role_info = {}
 
 function game_loop()
-	toast("开始咯！！！！")
 	local x, y
 	--每分钟检查一次等级信息
 	local time_role_check = os.date('%H%M',os.time())
 	local force_check_level = false
+	local basic_setting = false
+	if new_role_proc then
+		role_info.level = 1
+	end
+	
 	while (true) do
+		::level_check::
 		if not role_info.level then
 			force_check_level = true
+		elseif role_info.level == 28 then
+			toast('可以拜师了',30)
+			mSleep(10000)
+			goto level_check
 		end
 		
 		::guide::
@@ -145,6 +162,13 @@ function game_loop()
 			tap(x, y, 50, "click.png")
 			mSleep(500)
 			goto guide
+		end
+		
+		if cp.charge_ui() then
+			tap(870, 560, 50, "click.png")
+			mSleep(500)
+			tap(1110, 60, 50, "click.png")
+			mSleep(500)
 		end
 		
 		x,y = cp.use_item()
@@ -159,13 +183,21 @@ function game_loop()
 		end
 
 		if cp.is_main_ui() then
+			if role_info.level == 1 and not basic_setting then
+				ac.basic_settings()
+				basic_setting = true
+			end
+			
 			--每隔一分钟检查一下等级
 			mSleep(2000)
 			x,y = cp.get_protagonist_button()
 			if x ~= -1 and y ~= -1 and (force_check_level or time_role_check ~= os.date('%H%M',os.time())) then
 				tap(x, y, 50, "click.png")
-				mSleep(500)
-				role_info.level =  tp.get_level()
+				mSleep(1000)
+				local lv = tp.get_level()
+				if lv then
+					role_info.level = lv
+				end
 				
 				toast('当前等级>>'..tostring(role_info.level), 5)
 				tap(1000, 60, 50, "click.png")
@@ -253,15 +285,9 @@ function game_loop()
 			tap(950, 90, 50, "click.png")
 		end
 		
-		if cp.totem_summon_auto_equip() then
-			tap(185, 1080, 50, "click.png")
+		if cp.is_first_totem_summon_ui() then
+			tk.first_totem_summon()
 			mSleep(1000)
-		end
-		
-		if cp.charge_ui() then
-			tap(870, 560, 50, "click.png")
-			mSleep(500)
-			tap(1110, 60, 50, "click.png")
 		end
 		
 		::elephant_bus::
@@ -286,7 +312,7 @@ if isFrontApp("com.netmarble.stonemmocn") == 0 then
 	start_game()
 end
 
-mSleep(3500)
+mSleep(5000)
 
 if new_role_proc then
 	create_new_role()

@@ -201,6 +201,7 @@ function cp.is_dialog_ui()
 	return false
 end
 
+--任务过程中出现的各种交互对话框
 function cp.is_dialog_ui_interact()
 	local found_arrow = false
 	x,y = findMultiColorInRegionFuzzy( 0xe1d9cd, "7|9|0xd1be9b,12|16|0xc2a976,24|1|0xd5cbbb,12|6|0xdbcaaf,12|18|0x8f774a", 90, 1042, 514, 1109, 637)
@@ -213,6 +214,8 @@ function cp.is_dialog_ui_interact()
 		found_button = true
 	elseif isColor(862,386,0x3e4672,85) and isColor(865,430,0x3e4772,85) and isColor(1085,428,0x3e4872,85) and isColor(1086,387,0x3e4872,85) then
 		found_button = true
+	elseif isColor(878,415,0xf8e4cf,85) and isColor(885,437,0x702e31,85) and isColor(886,389,0x733131,85) and isColor(1083,431,0x733133,85) and isColor(1079,395,0x733133,85) then
+		found_button = true
 	end
 
 	return found_arrow and found_button
@@ -223,6 +226,8 @@ end
 function cp.is_mv_ui()
 	--判断跳过文字
 	if isColor(1071,11,0xd2cbb8,85) and isColor(1101,11,0xd8d1be,85) and isColor(1065,18,0xbab39e,85) and isColor(1099,21,0xb4ac96,85) then
+		return true
+	elseif isColor(606,51,0xfee271,85) and isColor(506,56,0xffe372,85) and isColor(507,51,0xf9dd6f,85) and isColor(714,74,0x925430,85) and isColor(427,62,0x935431,85) and isColor(1071,11,0xd1cbb7,85) then
 		return true
 	else
 		return false
@@ -438,18 +443,9 @@ function cp.is_growing_path_ui(...)
 	end
 end
 
---是否自动存在装备图腾界面
-function cp.totem_summon_auto_equip(...)
-	if isColor(497,102,0xdbdbda,85) and isColor(514,160,0xffffff,85) and isColor(498,175,0xf5f6f5,85) and isColor(514,182,0xffffff,85) and isColor(156,988,0x1e1c2b,85) and isColor(187,1031,0x3e4872,85) and isColor(185,1135,0x3e4872,85) and isColor(185,1114,0xf8e4cf,85) and isColor(601,569,0x392942,85) and isColor(635,570,0x5e4073,85) then
-		return true
-	else
-		return false
-	end
-end
-
---是否自动训练图腾
-function cp.totem_summon_auto_train(...)
-	if isColor(185,232,0x3e4872,85) and isColor(198,553,0x3d4770,85) and isColor(498,98,0xffffff,85) and isColor(205,45,0x372f47,85) and isColor(653,567,0x6a467c,85) and isColor(203,1159,0x3d4872,85) and isColor(168,1017,0x3e4772,85) and isColor(676,1167,0xd1a75a,85) and isColor(168,969,0x181821,85) then		
+--第一次进入图腾召唤页面
+function cp.is_first_totem_summon_ui(...)
+	if isColor(992,467,0xcd2106,85) and isColor(993,457,0xf34d10,85) and isColor(985,465,0xeb3410,85) and isColor(84,213,0xd8d8d7,85) and isColor(126,215,0xf6f8fa,85) and isColor(134,215,0xf6f7f7,85) and isColor(989,497,0x3d4972,85) and isColor(248,593,0x3b3328,85) then
 		return true
 	else
 		return false
