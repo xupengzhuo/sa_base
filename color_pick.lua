@@ -138,19 +138,20 @@ function cp.is_main_ui()
 		found_map = true
 	end
 	
-	local found_icon = false
-	x,y = findMultiColorInRegionFuzzy( 0x83a145, "-52|3|0xf1e411,37|-4|0xcac9c8", 90, 89, 44, 229, 96)
-	if x ~= -1 and y ~= -1 then
-		found_icon = true
-	end
-	local found_arraw = false
+--	local found_icon = false
+--	x,y = findMultiColorInRegionFuzzy( 0x83a145, "-52|3|0xf1e411,37|-4|0xcac9c8", 90, 89, 44, 229, 96)
+--	if x ~= -1 and y ~= -1 then
+--		found_icon = true
+--	end
 	
+	local found_arraw = false
 	x,y = findMultiColorInRegionFuzzy( 0xa3a2a0, "1|18|0x8d8b87,13|8|0xc6c4be", 90, 1096, 87, 1135, 126)
 	if x ~= -1 and y ~= -1 then
 		found_arraw = true
 	end
 
-	return found_map and found_icon and found_arraw
+--	return found_map and found_icon and found_arraw
+	return found_map and found_arraw
 end
 
 --判断是否处于任务界面中
@@ -412,13 +413,32 @@ end
 
 --日常任务页面
 function cp.daily_task(...)
-	x,y = findMultiColorInRegionFuzzy( 0x5a9a34, "2|12|0x5a9c36,58|-2|0x5acc74,58|13|0x5acc74", 90, 0, 0, 1135, 639)
+	--寻找绿色标记和经验值符号
+	--x,y = findMultiColorInRegionFuzzy( 0x5a9a34, "2|12|0x5a9c36,58|-2|0x5acc74,58|13|0x5acc74", 90, 0, 0, 1135, 639)
+	x,y = findMultiColorInRegionFuzzy( 0x5a9a34, "1|7|0x5a9b34,59|9|0x5acc75,57|-4|0x5acb74,5|3|0x5a9d38,-2|3|0x5a9932,326|-32|0x92e5e9,337|-32|0xa8edee", 90,  0, 0, 1135, 639)
+	--x,y = findMultiColorInRegionFuzzy( 0x5a9c36, "49|2|0x5ac86f,334|-28|0xa3ecf1,322|-24|0x8cd4db", 90,  0, 0, 1135, 639)
 	return x, y
 end
 
 --日常任务委托（活动页面）
 function cp.daily_task_weituo(...)
 	if isColor(677,435,0x3e4773,85) and isColor(841,471,0x3e4a70,85) and isColor(772,454,0xead6c3,85) and isColor(745,444,0xd0bfad,85) and isColor(324,176,0xf9de6f,85) and isColor(289,170,0xe3c966,85) and isColor(312,163,0xfbe070,85) and isColor(297,175,0xf9de70,85) and isColor(839,168,0x9e9285,85) and isColor(839,177,0x49453e,85) then		
+		return true
+	else
+		return false
+	end
+end
+--日常任务鲜花（活动页面）
+function cp.daily_task_flower(...)
+	if isColor(815,452,0x3e4872,85) and isColor(310,161,0xdbc262,85) and isColor(288,163,0xfce070,85) and isColor(311,170,0xedd36b,85) and isColor(293,171,0xe1c865,85) and isColor(305,163,0xf3d86d,85) and isColor(322,158,0xd5bd60,85) and isColor(323,176,0xffe372,85) and isColor(293,175,0xfce071,85) and isColor(679,464,0x3e4772,85) then		
+		return true
+	else
+		return false
+	end
+end
+--日常远古兽王（活动页面）
+function cp.daily_task_ygsw(...)
+	if isColor(290,172,0xfadf70,85) and isColor(290,166,0xf3d86c,85) and isColor(318,162,0xffe372,85) and isColor(315,176,0xf3d86d,85) and isColor(339,169,0xffe372,85) and isColor(361,170,0xfee271,85) and isColor(368,175,0xfade70,85) and isColor(325,176,0xdcc463,85) and isColor(820,444,0x3d4770,85) and isColor(564,167,0x49453e,85) then		
 		return true
 	else
 		return false
@@ -498,4 +518,51 @@ function cp.get_moka(...)
 		return false
 	end
 end
+
+--藏宝图的转盘页面
+function cp.treasure_map(...)
+	if isColor(275,234,0x22cdee,85) and isColor(279,388,0x63e3fa,85) and isColor(523,345,0x616159,85) and isColor(599,244,0x1d8ccf,85) and isColor(941,156,0xd19126,85) and isColor(934,409,0x746348,85) and isColor(55,131,0x5b5b55,85) and isColor(833,535,0x313130,85) then
+		return true
+	else
+		return false
+	end
+end
+
+--任务的界面的流程
+--1.判断是否为“前往”
+function cp.tasl_ui_is_going(...)
+	if isColor(973,577,0x3d4971,85) and isColor(840,549,0x3e4772,85) and isColor(838,574,0x3e4772,85) and isColor(914,566,0xe8d6c2,85) and isColor(898,563,0xefdbc7,85) and isColor(884,567,0xcdbdab,85) and isColor(889,553,0xf4e0cb,85) and isColor(905,552,0xf0ddc8,85) and isColor(913,552,0xe5d2be,85) and isColor(913,560,0xf6e2cd,85) then
+		return true
+	else
+		return false
+	end
+end
+
+--试炼页面
+function cp.is_trial_ui(...)
+	if isColor(567,361,0x31acf9,85) and isColor(492,339,0xffe673,85) and isColor(301,163,0xfee373,85) and isColor(262,159,0xffe673,85) and isColor(623,549,0x3e4872,85) and isColor(504,555,0x3e4872,85) and isColor(397,144,0x31a4f1,85) and isColor(911,99,0xd3aa5a,85) and isColor(909,87,0x51422a,85) then
+		return true
+	else
+		return false
+	end
+end
+
+--判断是否自动寻路中
+function cp.is_auto_moving(...)
+	if isColor(598,125,0xa7cf4e,85) and isColor(566,119,0xcbee60,85) and isColor(539,120,0xd5f662,85) then
+		return true
+	else
+		return false
+	end
+end
+
+--判断地图是否打开
+function cp.is_map_opening(...)
+	if isColor(1046,566,0x3e4871,85) and isColor(857,564,0xce9f4c,85) and isColor(1087,55,0xd2a65a,85) and isColor(1053,51,0xceb488,85) and isColor(58,589,0xbf9f73,85) and isColor(57,60,0xd1b78d,85) and isColor(845,579,0x3e4871,85) and isColor(875,565,0x8f3632,85) then
+		return true
+	else
+		return false
+	end
+end
+
 return cp

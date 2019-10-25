@@ -68,6 +68,8 @@ end
 
 function tk.growing_path_reward(...)
 	local x, y 
+	local ui_err_counter = 0
+
 	while (true) do
 		--找到红点
 		x,y = findMultiColorInRegionFuzzy( 0xef7841, "4|4|0xfb3f07,8|8|0xe73008,1|8|0xf2360e", 90, 0, 0, 1135, 639)		
@@ -121,23 +123,40 @@ function tk.growing_path_reward(...)
 			if x ~= -1 and y ~= -1 then
 				ac.weipasi_line()
 			end
-			
-			--选择一只狗作为奖励
-			if isColor(892,85,0xd2a957,85) and isColor(395,339,0x2fa9f5,85) and isColor(734,545,0x30abfa,85) and isColor(557,512,0x302c2a,85) and isColor(794,514,0x78664d,85) and isColor(402,547,0x30adfc,85) then
-				tap(745, 484, 50, "click.png")
-				mSleep(1000)
-				tap(950, 532, 50, "click.png")
-				mSleep(500)
-				return
-			end
 		end
+		
+					
+		--选择一只狗作为奖励
+		if isColor(892,85,0xd2a957,85) and isColor(395,339,0x2fa9f5,85) and isColor(734,545,0x30abfa,85) and isColor(557,512,0x302c2a,85) and isColor(794,514,0x78664d,85) and isColor(402,547,0x30adfc,85) then
+			tap(745, 484, 50, "click.png")
+			mSleep(1000)
+			tap(950, 532, 50, "click.png")
+			mSleep(500)
+			return
+		end
+		if ui_err_counter > 100 then
+			return -2
+		end
+		ui_err_counter = ui_err_counter + 1
+
 	end
 
 end
 	
 function tk.first_totem_summon(...)
-	dialog(111111)
-	tap(920, 480, 50, "click.png")
+	local x, y
+	mSleep(2000)
+	tap(420, 420, 50, "click.png")
+	mSleep(1000)
+	tap(185, 560, 50, "click.png")
+	mSleep(1000)
+	tap(465, 290, 50, "click.png")
+	mSleep(1000)
+	tap(1000, 60, 50, "click.png")
+	mSleep(1000)
+
+	local ui_err_counter = 0
+	
 	while (true) do
 		::guide::
 		x,y = cp.get_guide_arraw()
@@ -155,19 +174,135 @@ function tk.first_totem_summon(...)
 		--培养图腾
 		if isColor(173,461,0x3e4772,85) and isColor(484,495,0x3d4972,85) and isColor(316,473,0xebd9c4,85) and isColor(458,406,0x1a1514,85) and isColor(298,589,0x1e343a,85) and isColor(348,590,0x1e343a,85) then
 			tap(330, 480, 50, "click.png")
-			mSleep(1000)
+			mSleep(3000)
 			tap(550, 550, 50, "click.png")
-			mSleep(1000)
+			mSleep(3000)
 			tap(300, 550, 50, "click.png")
-			mSleep(1000)
+			mSleep(3000)
 			tap(935, 85, 50, "click.png")
-			mSleep(1000)
+			mSleep(3000)
 			tap(1000, 60, 50, "click.png")
 			return
 		end
+		if ui_err_counter > 100 then
+			return -2
+		end
+		ui_err_counter = ui_err_counter + 1
+
 	end
 end
 
 
-
+function tk.daily_task_ygsw(...)
+	local x, y
+	local in_place
+	local location, target_index =  nil, 1
+	local task_counter = 0
+	local team_ready = false
+	local finding_target = false
+	local ygsw_data_struct = {
+			syns={
+				{
+					--下方数字依次表示迷你地图上的点击坐标x,y，主界面的怪物点击坐标x，y
+					630, 415, 665, 345
+				},
+				{
+					657, 390, 680, 340
+				},
+				{
+					
+					315, 412, 480, 265
+				},
+				{
+					345, 500, 485, 305
+				}
+			}
+		}
+	toast('开始远古兽王任务',1)
+	mSleep(1000)
+	tap(760, 455, 50, 'click.png')
+	mSleep(3000)
+	while true do
+		::go_hunting::
+		if not in_place then
+			--找到推荐的兽王地图并前往
+			x,y = findMultiColorInRegionFuzzy( 0xa0302e, "39|9|0xbb4444,29|-3|0xfdf2ca,35|7|0xe9d3b0,16|-5|0xfbefc7,36|2|0xf4e4be,52|13|0x3e4772", 90, 0, 0, 1135, 639)
+			if x ~= -1 and y ~= -1 then
+				in_place = true
+				x = x + 100
+				y = y + 40
+				tap(x, y, 50, "click.png")
+				mSleep(3000)
+			else
+				goto go_hunting
+			end	
+			
+		end
+		
+		--主界面的时候，创建队伍/打开地图
+		if cp.is_main_ui() and not cp.is_auto_moving() and not location and not team_ready then
+			dialog('1 time')
+			--没组队就组队
+			if not team_ready then
+				ut.team_assemble()
+				team_ready = true
+			end
+			
+			--确认地图位置
+			if not location then
+				ac.open_map()
+				mSleep(500)
+				if isColor(250,159,0x77c604,85) and isColor(197,268,0x77c606,85) and isColor(292,292,0x74c605,85) and isColor(271,531,0x75c606,85) and isColor(614,508,0x74c602,85) and isColor(646,276,0x76c504,85) and isColor(485,142,0x75c606,85) and isColor(926,566,0x3e4871,85) and isColor(857,556,0xddb967,85) then
+					location = "syns"
+				end
+				ac.close_map()
+			end			
+		end
+		
+		if task_counter <5 and not finding_target then
+			ac.open_map()
+			tap(ygsw_data_struct[location][target_index][1], ygsw_data_struct[location][target_index][2], 50, "click.png")
+			mSleep(500)
+			ac.close_map()
+			
+			mSleep(1000)
+			toast('正在寻路，当前任务：'..task_counter..'...当前寻找次数：'..target_index,1)
+			finding_target = true
+		end
+		
+		--没有移动说明已经到达位置，点击怪物
+		if not cp.is_auto_moving() and not cp.is_map_opening()  then
+			tap(ygsw_data_struct[location][target_index][3],ygsw_data_struct[location][target_index][4], 50, "click.png")
+			mSleep(500)
+			if isColor(1048,197,0x743131,85) and isColor(1053,280,0x3e4872,85) and isColor(1048,349,0x3e4872,85) and isColor(1048,406,0x8c6936,85) and isColor(886,201,0xf8e4cf,85) and isColor(910,266,0x3e4872,85) and isColor(908,349,0x3e4872,85) and isColor(904,415,0x8c6937,85) then
+				toast('找到怪物，开始战斗',3)
+				task_counter = task_counter + 1
+				ac.click_center()
+			else
+				target_index = target_index  % #ygsw_data_struct[location] + 1
+			end
+			finding_target = false
+		end
+		
+		if task_counter == 5 then
+			dialog('任务完成')
+		end
+		--如果地图位置处于萨伊纳斯平原，打开地图，
+--		if isColor(250,159,0x77c604,85) and isColor(197,268,0x77c606,85) and isColor(292,292,0x74c605,85) and isColor(271,531,0x75c606,85) and isColor(614,508,0x74c602,85) and isColor(646,276,0x76c504,85) and isColor(485,142,0x75c606,85) and isColor(926,566,0x3e4871,85) and isColor(857,556,0xddb967,85) then
+--			--地图上找怪打
+--			while (true) do				
+--				--正在移动
+--				if not cp.is_auto_moving()
+--					tap(625, 420, 50, "click.png")
+--					mSleep(500)
+--					tap(1090, 40, 50, "click.png")
+--				end
+					
+				
+--			end
+							
+			
+--		end
+	end
+end
 return tk

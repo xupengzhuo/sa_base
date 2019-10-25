@@ -12,6 +12,15 @@ function ac.click_center(...)
 	tap(565, 325, 50, "click.png")
 end
 
+function ac.open_map(...)
+	tap(1025, 55, 50, "click.png")
+	mSleep(500)
+end
+
+function ac.close_map(...)
+	tap(1085, 40, 50, "click.png")
+	mSleep(500)
+end
 
 function ac.weipasi_line(...)
 	touch():Step(1):on(487, 210):move(430, 293):move(525, 412):move(624, 410):move(717, 379):move(595, 281):off()

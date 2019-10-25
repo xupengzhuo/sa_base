@@ -10,6 +10,10 @@ tk = require("task")
 
 local new_role_proc = false
 
+--clear_game_data()
+
+
+
 function clear_game_data(...)
 	os.execute("rm -rf "..appDataPath("com.netmarble.stonemmocn"))
 end
@@ -21,12 +25,12 @@ function start_game(...)
 		if not choosed_server then
 			--狂点左下角跳过启动画面
 			tap(15, 620, 50, "click.png")
-			mSleep(200)
+			mSleep(500)
 		end
 		
 		if cp.need_update() then
 			tap(566, 435, 50, "click.png")
-			mSleep(500)
+			mSleep(1000)
 		end
 		
 		if cp.start_screen_announcement() then 
@@ -135,17 +139,18 @@ function create_new_role(...)
 end
 
 role_info = {}
-
+role_info.level_progress = {}
 function game_loop()
 	local x, y
 	--每分钟检查一次等级信息
-	local time_role_check = os.date('%H%M',os.time())
+	local time_role_check = tonumber(os.date('%H%M',os.time()))
 	local force_check_level = false
 	local basic_setting = false
 	if new_role_proc then
 		role_info.level = 1
 	end
 	
+	local ui_err_counter = 0
 	while (true) do
 		::level_check::
 		if not role_info.level then
@@ -154,6 +159,12 @@ function game_loop()
 			toast('可以拜师了',30)
 			mSleep(10000)
 			goto level_check
+		--28级以下的小号，如果停留时间过长（每三分钟检查一次等级，也就是9分钟不升级），说明可能游戏卡死，在地图上随便点一下
+		elseif role_info.level and role_info.level < 28 and role_info.level_progress[role_info.level] > 3 then
+			tap(1015, 55, 50, "click.png")
+			mSleep(1000)
+			tap(530, 220, 50, "click.png")
+			mSleep(1000)
 		end
 		
 		::guide::
@@ -183,6 +194,7 @@ function game_loop()
 		end
 
 		if cp.is_main_ui() then
+			ui_err_counter = 0
 			if role_info.level == 1 and not basic_setting then
 				ac.basic_settings()
 				basic_setting = true
@@ -191,15 +203,28 @@ function game_loop()
 			--每隔一分钟检查一下等级
 			mSleep(2000)
 			x,y = cp.get_protagonist_button()
-			if x ~= -1 and y ~= -1 and (force_check_level or time_role_check ~= os.date('%H%M',os.time())) then
+			if x ~= -1 and y ~= -1 and (force_check_level or tonumber(os.date('%H%M',os.time())) - time_role_check >= 3) then
 				tap(x, y, 50, "click.png")
 				mSleep(1000)
 				local lv = tp.get_level()
+				local found_lv = false
 				if lv then
 					role_info.level = lv
+					
+					for key,value in pairs(role_info.level_progress) do
+						if key == lv then
+							role_info.level_progress[key] = role_info.level_progress[key] + 1
+							found_lv = true
+						end
+					end
+					
+					if not found_lv then
+						role_info.level_progress[lv] = 1
+					end
 				end
 				
-				toast('当前等级>>'..tostring(role_info.level), 5)
+				
+				toast('当前等级>>'..tostring(role_info.level), 1)
 				tap(1000, 60, 50, "click.png")
 				mSleep(500)
 				force_check_level = false
@@ -209,8 +234,16 @@ function game_loop()
 		end
 		
 		if cp.is_task_ui() then
+			--点击前往按钮
 			tap(900, 560, 50, "click.png")
-			mSleep(5000)
+			
+--			if cp.tasl_ui_is_going() then
+--			--任务界面
+--				tap(900, 560, 50, "click.png")
+--			else
+--				tap(900, 560, 50, "click.png")
+--			end
+			mSleep(2000)
 		end
 		
 		--日常任务
@@ -224,6 +257,15 @@ function game_loop()
 			if cp.daily_task_weituo() then
 				tk.daily_weituo()
 			end
+			
+			if cp.daily_task_flower() then
+				tk.daily_flower()
+			end
+			
+			if cp.daily_task_ygsw() then
+				tk.daily_ygsw()
+			end
+
 		end
 		
 		if cp.is_dialog_ui() then
@@ -243,7 +285,6 @@ function game_loop()
 		end
 		
 		if cp.is_growing_path_ui() then
-			dialog('fffff', 3)
 			tk.growing_path_reward()
 		end
 		
@@ -290,6 +331,14 @@ function game_loop()
 			mSleep(1000)
 		end
 		
+		--试炼页面
+		if cp.is_trial_ui() then
+			tap(800, 560, 50, "click.png")
+			mSleep(1000)
+			tap(570, 550, 50, "click.png")
+			mSleep(500)
+		end
+	
 		::elephant_bus::
 		if cp.elephant_bus_ui() then
 			tap(1045, 575, 2000, "click.png")
@@ -299,15 +348,31 @@ function game_loop()
 		
 		::jiamei_air::
 		if cp.jiamei_air_ui() then
-			tap(1045, 525, 2500, "click.png")
+			tap(1045, 525, 1800, "click.png")
 			mSleep(500)
 			goto jiamei_air
 		end
+		
+		
+		--退出到桌面了
+		if isColor(1020,531,0x46e761,85) and isColor(1021,397,0x1db3f8,85) and isColor(782,534,0xf5142a,85) and isColor(1077,114,0x796dfd,85) and isColor(929,318,0xffffff,85) and isColor(927,353,0x93acbb,85) and isColor(1039,389,0xff3b30,85) then
+			return -1
+		end
+		---意外打开设置界面了
+		if isColor(953,555,0x733133,85) and isColor(1056,581,0x1c8cc9,85) and isColor(228,552,0x5f703e,85) and isColor(973,99,0xd4ab5a,85) and isColor(513,94,0xf7d39f,85) and isColor(195,398,0x3d4772,85) and isColor(217,411,0x35312a,85) and isColor(351,412,0x3e4872,85) then
+			tap(970, 85, 50, "click.png")
+			mSleep(500)
+		end
+		
+		--连续100次循环都没有见到 main ui，说明界面卡死，需要重启游戏
+		if ui_err_counter > 100 then
+			return -2
+		end
+		ui_err_counter = ui_err_counter + 1
 	end
 end
 
-
---clear_game_data()
+::start_game_loop::
 if isFrontApp("com.netmarble.stonemmocn") == 0 then
 	start_game()
 end
@@ -318,7 +383,15 @@ if new_role_proc then
 	create_new_role()
 end
 
-game_loop()
+local res = game_loop()
+if  res == -1 then
+	goto start_game_loop
+elseif res == -2 then
+	closeApp("com.netmarble.stonemmocn")
+	mSleep(2000)
+	goto start_game_loop
+end
+
 --- debug ---
 
 --x,y = findMultiColorInRegionFuzzy( 0x1e1e1f, "94|101|0x1e1e1f,4|82|0xd9d6cc,89|22|0x6c6a67", 90, 662, 428, 549, 546)

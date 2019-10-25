@@ -10,3 +10,5 @@ tmp.lua
 task.lua
 
 text_pick.lua
+Treasure_Map.lua
+util.lua
