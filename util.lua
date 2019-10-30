@@ -5,8 +5,9 @@ function ut.team_assemble(...)
 	if not cp.is_main_ui() then
 		return 
 	end
+	--点击主界面的组队标签
 	tap(1050, 105, 50, "click.png")
-	mSleep(1000)
+	mSleep(1500)
 	--未创建队伍，在主界面点创建
 	if isColor(1078,352,0x3e4872,85) and isColor(962,347,0x3e4872,85) and isColor(1057,233,0x8c6937,85) and isColor(981,232,0x8c6937,85) and isColor(990,301,0x5d452d,85) and isColor(1042,299,0x5d452d,85) then
 		tap(1015, 345, 50, "click.png")
@@ -22,6 +23,7 @@ function ut.team_assemble(...)
 		tap(1050, 105, 50, "click.png")
 		mSleep(1000)
 	end
+	
 	--队伍已经齐了就返回，判断队员名字右侧的小绿点
 	if isColor(966,489,0x7cb559,85) and isColor(785,488,0x7cb559,85) and isColor(604,489,0x7cb559,85) and isColor(423,490,0x7cb559,85) then
 		tap(980, 80, 50, "click.png")

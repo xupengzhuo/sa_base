@@ -18,7 +18,7 @@ function ac.open_map(...)
 end
 
 function ac.close_map(...)
-	tap(1085, 40, 50, "click.png")
+	tap(1100, 25, 50, "click.png")
 	mSleep(500)
 end
 

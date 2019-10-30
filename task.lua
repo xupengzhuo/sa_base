@@ -206,13 +206,14 @@ function tk.daily_task_ygsw(...)
 					--下方数字依次表示迷你地图上的点击坐标x,y，主界面的怪物点击坐标x，y
 					630, 415, 665, 345
 				},
-				{
-					657, 390, 680, 340
-				},
-				{
+--这俩是精英兽王
+--				{
+--					657, 390, 680, 340
+--				},
+--				{
 					
-					315, 412, 480, 265
-				},
+--					315, 412, 480, 265
+--				},
 				{
 					345, 500, 485, 305
 				}
@@ -241,7 +242,6 @@ function tk.daily_task_ygsw(...)
 		
 		--主界面的时候，创建队伍/打开地图
 		if cp.is_main_ui() and not cp.is_auto_moving() and not location and not team_ready then
-			dialog('1 time')
 			--没组队就组队
 			if not team_ready then
 				ut.team_assemble()
@@ -262,47 +262,39 @@ function tk.daily_task_ygsw(...)
 		if task_counter <5 and not finding_target then
 			ac.open_map()
 			tap(ygsw_data_struct[location][target_index][1], ygsw_data_struct[location][target_index][2], 50, "click.png")
-			mSleep(500)
+			mSleep(1000)
 			ac.close_map()
-			
 			mSleep(1000)
 			toast('正在寻路，当前任务：'..task_counter..'...当前寻找次数：'..target_index,1)
 			finding_target = true
 		end
 		
 		--没有移动说明已经到达位置，点击怪物
-		if not cp.is_auto_moving() and not cp.is_map_opening()  then
+		if cp.is_main_ui() and not cp.is_auto_moving() then
 			tap(ygsw_data_struct[location][target_index][3],ygsw_data_struct[location][target_index][4], 50, "click.png")
 			mSleep(500)
 			if isColor(1048,197,0x743131,85) and isColor(1053,280,0x3e4872,85) and isColor(1048,349,0x3e4872,85) and isColor(1048,406,0x8c6936,85) and isColor(886,201,0xf8e4cf,85) and isColor(910,266,0x3e4872,85) and isColor(908,349,0x3e4872,85) and isColor(904,415,0x8c6937,85) then
 				toast('找到怪物，开始战斗',3)
 				task_counter = task_counter + 1
-				ac.click_center()
+				tap(970, 205, 50, "click.png")
+				mSleep(500)
+				if cp.fight_warning() then
+					tap(645, 440, 50, "click.png")
+					mSleep(500)
+					fighting = true
+				end
+				mSleep(1000)
 			else
 				target_index = target_index  % #ygsw_data_struct[location] + 1
 			end
 			finding_target = false
 		end
 		
-		if task_counter == 5 then
+		if task_counter > 5 then
 			dialog('任务完成')
+			return
 		end
-		--如果地图位置处于萨伊纳斯平原，打开地图，
---		if isColor(250,159,0x77c604,85) and isColor(197,268,0x77c606,85) and isColor(292,292,0x74c605,85) and isColor(271,531,0x75c606,85) and isColor(614,508,0x74c602,85) and isColor(646,276,0x76c504,85) and isColor(485,142,0x75c606,85) and isColor(926,566,0x3e4871,85) and isColor(857,556,0xddb967,85) then
---			--地图上找怪打
---			while (true) do				
---				--正在移动
---				if not cp.is_auto_moving()
---					tap(625, 420, 50, "click.png")
---					mSleep(500)
---					tap(1090, 40, 50, "click.png")
---				end
-					
-				
---			end
-							
-			
---		end
+	
 	end
 end
 return tk

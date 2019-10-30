@@ -565,4 +565,12 @@ function cp.is_map_opening(...)
 	end
 end
 
+--战斗前警告
+function cp.fight_warning(...)
+	if isColor(736,448,0x743132,85) and isColor(544,450,0x733132,85) and isColor(498,450,0x5f703e,85) and isColor(374,425,0x5f703e,85) and isColor(759,202,0xd6ac5a,85) and isColor(538,423,0x723131,85) and isColor(506,424,0x60713c,85) then
+		return true
+	else
+		return false
+	end
+end
 return cp
